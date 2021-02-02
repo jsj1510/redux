@@ -52,8 +52,20 @@
                     <li><input type="button" value="del"></li>
                 </ul>
                 `
+
             }
             function article() {
+                let state = store.getState();
+                let i = 0;
+                let aTitle, aDesc;
+                while(i < state.cont.length){
+                    if(state.cont[i].id === state.selcted_id) {
+                        aTitle = state.cont[i].title;
+                        aDesc = state.cont[i].desc;
+                        break;
+                    } 
+                    i = i + 1;
+                }
                 document.querySelector("#cont").innerHTML =
                 `
                 <article>
@@ -65,14 +77,14 @@
             function reducer(state, action) {
                 if (state == undefined) {
                     return {
-                        selcted_id:null,
+                        selcted_id:2,
                         cont:[
                             {id:1, title:"HTML", desc:"html is"},
                             {id:2, title:"CSS", desc:"css is"}
                         ]
                     }
                 }
-                let newState= {};
+                let newState;
                 if (action.type === 'SELECT') {
                     newState = Object.assign({}, state, { selcted_id:action.id })
                 }
@@ -80,6 +92,7 @@
                 return newState;
             }
             let store = Redux.createStore(reducer);
+            store.subscribe(article);
             subject();
             TOC();
             control();

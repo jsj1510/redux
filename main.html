@@ -21,23 +21,27 @@
                 </header>
                 `
             }
-            function TOC() {
+            function TOC(){
                 let state = store.getState();
                 let i = 0;
                 let liTags = '';
-                while(i < state.cont.length){
-                    liTags = liTags + ` 
+                while(i<state.cont.length){
+                    liTags = liTags + `
                     <li>
-                        <a href="${state.cont[i].id}">${state.cont[i].title}</a>
-                    </li>
-                    `;
+                        <a onclick = "
+                            event.preventDefault();
+                            let action = {type:'SELECT', 
+                            id:${ state.cont[i].id }
+                            store.dispatch(action);" 
+                            href="${ state.cont[i].id }">
+                            ${ state.cont[i].title }
+                        </a>
+                    </li>`;
                     i = i + 1;
                 }
-                document.querySelector("#toc").innerHTML =
-                ` <nav>
-                    <ol>
-                        <li>${liTags}</li>
-                    </ol>
+                document.querySelector('#toc').innerHTML = `
+                <nav>
+                    <ol>${liTags}</ ol>
                 </nav>
                 `;
             }
@@ -61,12 +65,19 @@
             function reducer(state, action) {
                 if (state == undefined) {
                     return {
+                        selcted_id:null,
                         cont:[
                             {id:1, title:"HTML", desc:"html is"},
                             {id:2, title:"CSS", desc:"css is"}
                         ]
                     }
                 }
+                let newState= {};
+                if (action.type === 'SELECT') {
+                    newState = Object.assign({}, state, { selcted_id:action.id })
+                }
+                console.log(aciton, newState);
+                return newState;
             }
             let store = Redux.createStore(reducer);
             subject();

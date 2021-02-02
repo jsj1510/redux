@@ -6,23 +6,52 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <h1>WEB</h1>
-        HELLO
-    </header>
-    <nav>
-        <ol>
-            <li><a href="1.html">HTML</a></li>
-            <li><a href="2.html">css</a></li>
-        </ol>
-    </nav>
-    <article>
-        <ul>
-            <li><a href="/create">create</a></li>
-            <li><input type="button" value="del"></li>
-        </ul>
-        <h2>html</h2>
-        html is
-    </article>
+    <div id="subject"></div>
+    <div id="toc"></div>
+    <div id="control"></div>
+    <div id="cont"></div>
+        <script>
+            function subject(){
+                document.querySelector("#subject").innerHTML =
+                `<header>
+                    <h1>WEB</h1>
+                    HELLO
+                </header>
+                `
+            }
+            function TOC() {
+                document.querySelector("#toc").innerHTML =
+                ` <nav>
+                    <ol>
+                        <li><a href="1.html">HTML</a></li>
+                        <li><a href="2.html">css</a></li>
+                    </ol>
+                </nav>
+                `
+            }
+            function control() {
+                document.querySelector("#control").innerHTML =
+                `<ul>
+                    <li><a href="/create">create</a></li>
+                    <li><input type="button" value="del"></li>
+                </ul>
+                `
+            }
+            function article() {
+                document.querySelector("#cont").innerHTML =
+                `
+                <article>
+                    <h2>html</h2>
+                    html is
+                </article>
+                `
+            }
+            subject();
+            TOC();
+            control();
+            article();
+        </script>
+    
+    
 </body>
 </html>
